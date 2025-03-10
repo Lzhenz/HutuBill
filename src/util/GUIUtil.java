@@ -12,7 +12,7 @@ public class GUIUtil {
         if (osName.startsWith("Windows")){
             // Win
             imageFolder = "C:/Project/imageFolder";
-        } else if (osName.startsWith("Mac os")) {
+        } else if (osName.startsWith("Mac OS")) {
             // Mac os
             imageFolder = "/Users/zhenz/study/imageFolder";
         }
