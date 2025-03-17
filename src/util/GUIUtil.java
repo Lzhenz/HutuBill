@@ -18,6 +18,10 @@ public class GUIUtil {
         }
     }
 
+    public static void setImageIcon(){
+
+    }
+
     public static void main(String[] args) {
         GUIUtil.setImageFolder(new JButton() , "hello" , "hello");
     }
