@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 public class HutuMainFrame {
     public static void main(String[] args) {
         JFrame f = new JFrame();
-        f.setSize(500 , 450);
+        f.setSize(700 , 450);
         f.setTitle("一本糊涂账");
         f.setLocationRelativeTo(null);
         f.setResizable(false);

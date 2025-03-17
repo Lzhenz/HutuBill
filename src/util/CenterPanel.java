@@ -15,7 +15,7 @@ public class CenterPanel extends JPanel {
         this.strech = strech;
     }
 
-    public CenterPanel(int i, double rate) {
+    public CenterPanel(double rate) {
         this(rate, true);
     }
 
