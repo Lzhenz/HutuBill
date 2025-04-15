@@ -61,6 +61,12 @@ public class GUIUtil {
         showPanel(p , 0.85);
     }
 
+    /**
+     * 检查是否是数字
+     * @param tf
+     * @param input
+     * @return
+     */
     public static boolean checkNumber(JTextField tf , String input) {
         if (!checkEmpty(tf, input)){
             return false;
@@ -74,6 +80,20 @@ public class GUIUtil {
             tf.grabFocus();
             return false;
         }
+    }
+
+    public static boolean checkZero(JTextField tf , String input) {
+        if (checkNumber(tf , input)){
+            return false;
+        }
+        String text = tf.getText().trim();
+
+        if (0 == Integer.parseInt(text)){
+            JOptionPane.showMessageDialog(null, input + " 不能为零");
+            tf.grabFocus();
+            return false;
+        }
+        return true;
     }
 
     public static boolean checkEmpty(JTextField tf , String input) {
@@ -94,8 +114,14 @@ public class GUIUtil {
         }
     }
 
-    public static void setImageIcon(){
-
+    public static void setImageIcon(JButton b, String fileName, String tip){
+        ImageIcon i = new ImageIcon(new File(imageFolder, fileName).getAbsolutePath());
+        b.setIcon(i);
+        b.setPreferredSize(new Dimension(61,81));
+        b.setToolTipText(tip);
+        b.setVerticalTextPosition(JButton.BOTTOM);
+        b.setHorizontalTextPosition(JButton.CENTER);
+        b.setText(tip);
     }
 
     public static void main(String[] args) {
