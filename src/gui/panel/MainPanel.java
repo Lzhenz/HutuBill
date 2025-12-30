@@ -36,7 +36,7 @@ public class MainPanel extends  JPanel{
         GUIUtil.setImageIcon(bReport , "report.png" , "月消费报表");
         GUIUtil.setImageIcon(bConfig , "config.png" , "设置");
         GUIUtil.setImageIcon(bBackup , "backup.png" , "消费一览");
-        GUIUtil.setImageIcon(bRecover , "restore.png" , "恢");
+        GUIUtil.setImageIcon(bRecover , "restore.png" , "恢复");
 
         tb.add(bSpend);
         tb.add(bRecord);

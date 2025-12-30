@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="lombok-1.18.42">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../projectAsserts/HutuBill_plugin/lombok-1.18.42.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

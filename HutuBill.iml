@@ -45,5 +45,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="lombok-1.18.42" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.0.8-bin" level="project" />
   </component>
 </module>
