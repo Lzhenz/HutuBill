@@ -5,7 +5,7 @@ import gui.panel.MainPanel;
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
-    private static MainFrame instance = new MainFrame();
+    public static MainFrame instance = new MainFrame();
 
     private MainFrame (){
         this.setSize(500 , 450);
