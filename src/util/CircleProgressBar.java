@@ -25,41 +25,43 @@ public class CircleProgressBar extends JPanel {
         progressText = "0%";
     }
 
-    public void paint(Graphics g){
+    @Override
+    public void paint(Graphics g) {
         super.paint(g);
-        Graphics2D graphics2D = (Graphics2D) g;
-        // 开启抗锯齿
-        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-        int x = 0;
-        int y = 0;
-        int width = 0;
-        int height = 0;
-        int fontSize = 0;
-        if (getWidth() >= getHeight()){
-            x = (getWidth() -getHeight()) / 2 + 25;
-            y = 25;
-            width = getWidth() - 60;
-            height = getHeight() - 50;
-            fontSize = getWidth() / 8;
-        } else {
-            x = 25;
-            y = (getHeight() - getHeight()) / 2 + 25;
-            width = getWidth() - 60;
-            height = getHeight() - 50;
-            fontSize = getHeight() / 8;
-        }
-        graphics2D.setStroke(new BasicStroke(20.0f));
-        graphics2D.setColor(backgroundColor);
-        graphics2D.drawArc(x, y , width , height , 0 , 360);
-        graphics2D.setColor(foregroundColor);
-        graphics2D.drawArc(x, y , width , height , 90 , -(int) (360 * ((progress * 1.0) / (maximumProgress - minimumProgress))));
-        graphics2D.setFont(new Font("黑体" , Font.BOLD , fontSize));
-        FontMetrics fontMetrics = graphics2D.getFontMetrics();
-        int digitalWidth = fontMetrics.stringWidth(progressText);
-        int digitalAscent = fontMetrics.getAscent();
-        graphics2D.setColor(foregroundColor);
-        graphics2D.drawString(progressText, getWidth() / 2 - digitalWidth / 2, getHeight() / 2 + digitalAscent / 2);
+        Graphics2D g2 = (Graphics2D) g;
+
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        int size = Math.min(getWidth(), getHeight()) - 40;
+        int x = (getWidth() - size) / 2;
+        int y = (getHeight() - size) / 2;
+
+        g2.setStroke(new BasicStroke(20f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+
+        // 背景圆
+        g2.setColor(backgroundColor);
+        g2.drawArc(x, y, size, size, 0, 360);
+
+        // 进度圆
+        g2.setColor(foregroundColor);
+        g2.drawArc(
+                x, y, size, size,
+                90,
+                -(int) (360.0 * progress / maximumProgress)
+        );
+
+        // 文字
+        int fontSize = size / 5;
+        g2.setFont(new Font("黑体", Font.BOLD, fontSize));
+        FontMetrics fm = g2.getFontMetrics();
+        int textWidth = fm.stringWidth(progressText);
+        int textAscent = fm.getAscent();
+
+        g2.drawString(
+                progressText,
+                getWidth() / 2 - textWidth / 2,
+                getHeight() / 2 + textAscent / 2
+        );
     }
 
     public int getProgress() {
