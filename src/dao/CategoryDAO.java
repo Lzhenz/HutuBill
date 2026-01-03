@@ -118,22 +118,3 @@ public class CategoryDAO {
         return categories;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
