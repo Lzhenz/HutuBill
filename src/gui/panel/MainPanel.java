@@ -1,5 +1,6 @@
 package gui.panel;
 
+import gui.Listener.ToolBarListener;
 import util.CenterPanel;
 import util.GUIUtil;
 
@@ -35,7 +36,7 @@ public class MainPanel extends  JPanel{
         GUIUtil.setImageIcon(bCategory , "category2.png" , "消费分类");
         GUIUtil.setImageIcon(bReport , "report.png" , "月消费报表");
         GUIUtil.setImageIcon(bConfig , "config.png" , "设置");
-        GUIUtil.setImageIcon(bBackup , "backup.png" , "消费一览");
+        GUIUtil.setImageIcon(bBackup , "backup.png" , "备份");
         GUIUtil.setImageIcon(bRecover , "restore.png" , "恢复");
 
         tb.add(bSpend);
@@ -47,11 +48,26 @@ public class MainPanel extends  JPanel{
         tb.add(bRecover);
 
         tb.setFloatable(false);
-        workingPanel = new CenterPanel(0.8);
+        workingPanel = new CenterPanel(0.88);
 
         setLayout(new BorderLayout());
+
+        // 主要是在这里将整个面板的构造设计清楚
         add(tb, BorderLayout.NORTH);
         add(workingPanel, BorderLayout.CENTER);
+
+        addListener();
+    }
+
+    public void addListener(){
+        ToolBarListener toolBarListener = new ToolBarListener();
+        bSpend.addActionListener(toolBarListener);
+        bRecord.addActionListener(toolBarListener);
+        bCategory.addActionListener(toolBarListener);
+        bReport.addActionListener(toolBarListener);
+        bConfig.addActionListener(toolBarListener);
+        bBackup.addActionListener(toolBarListener);
+        bRecover.addActionListener(toolBarListener);
     }
 
     public static void main(String[] args) {
