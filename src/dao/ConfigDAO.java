@@ -4,6 +4,8 @@ import entity.Config;
 import util.DBUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConfigDAO {
 
@@ -97,29 +99,77 @@ public class ConfigDAO {
         return config;
     }
 
+    // 下面进行全部查询和分页查询
 
+    /**
+     * 首先进行全部查询，全部查询调用的是分页查询的功能。
+     * @return
+     */
+    public List<Config> list(){
+        // 在实际的工程中，Short.MAX_VALUE不会被使用，这是一个教学型的写法
+        return list(0 , Short.MAX_VALUE);
+    }
 
+    /**
+     * 分页查询
+     * @param start 开始的页数
+     * @param count 从这一页一共要查询多少数据
+     * @return
+     */
+    public List<Config> list(int start , int count){
+        List<Config> configs = new ArrayList<Config>();
 
+        String sql = "Select * from config limit ?,?";
 
+        try(Connection c = DBUtil.getConnection() ;  PreparedStatement ps = c.prepareStatement(sql)){
+            ps.setInt(1 , start);
+            ps.setInt(2 , count);
 
+            ResultSet rs = ps.executeQuery();
+            // 这里面有很多的数据，所以应该用while比较好
+            while(rs.next()){
+                Config config = new Config();
+                int id = rs.getInt(1);
+                String key = rs.getString("key_");
+                String value = rs.getString("value");
+                config.id = id;
+                config.key = key;
+                config.value = value;
+                // 将数据添加到configs中
+                configs.add(config);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return configs;
+    }
 
+    /**
+     * 属于是业务逻辑，通过某个预算的名称去寻找当前的值
+     * @param key
+     * @return
+     */
+    public Config getByKey(String key){
+        Config config = null;
+        String sql = "select * from config where key_ = ?";
+        try(Connection c = DBUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, key);
+            ResultSet rs = ps.executeQuery();
 
+            if (rs.next()){
+                config = new Config();
+                int id = rs.getInt(1);
+                String value = rs.getString("value");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                config.id = id;;
+                config.key = key;
+                config.value = value;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return config;
+    }
 }
 
 
